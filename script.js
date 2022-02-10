@@ -1,4 +1,4 @@
-
+let chooser = "solid";
 const clearBtn = document.querySelector('#clearButton');
 clearBtn.addEventListener("click", clearGrid)
 let gridSize = document.querySelector("#size").value
@@ -10,26 +10,36 @@ determineWhichRadio();
 
 function determineWhichRadio(){
     let allRadioButtons = document.querySelectorAll('input[type=radio]')
-    console.log(allRadioButtons);
 
     allRadioButtons.forEach(element => {
             element.addEventListener("click", determineColor);
     });
 }
 
-function determineColor(e){
+function determineColor(){
+    console.log(this)
     if (this.value == "solid"){
         color = document.querySelector("#color").value
-        
+        console.log("Changed - solid color")
+        chooser = "solid"
     }
     else if(this.value == "randomColor"){
-        color = "#"+Math.floor(Math.random()*16777215).toString(16);
-        console.log(color)
+        chooser = "randomColor"
+        console.log("Changed -- Random Color")
     }
     else if(this.value == "darken"){
         
     }
-    console.log(e.target)
+}
+
+function changeColor(e){
+    if (chooser == "solid"){
+        e.target.setAttribute("style", "background-color:"+color+";")
+    }
+    else if (chooser == "randomColor"){
+        color = "#"+Math.floor(Math.random()*16777215).toString(16);
+        e.target.setAttribute("style", "background-color:"+color+";")
+    }
 }
 
 function createMyDivs(number){
@@ -56,11 +66,6 @@ function createMyDivs(number){
     .setProperty('--wrapperSize', wrapperSize);
 }
 
-function changeColor(e){
-    e.target.setAttribute("style", "background-color:"+color+";")
-    console.log(e)
-    console.log(this)
-}
 
 function clearGrid(){
     let wrapper = document.querySelector(".wrapper")
