@@ -12,10 +12,10 @@
 
     <label for="size">Grid size:</label>
     <input id="size" name="size" type="number" placeholder="Default: 8" value="8">
-    <button id="clearButton">Clear</button>
+    <button id="clearButton">Clear/Remake Grid</button>
     <input type="radio" id="solid" name="option" value="solid" checked>
     <label for="solid">Solid Color</label>
-    <input type="color" id="color" value="#696969">
+    <input type="color" id="color"  value="#696969" onchange="determineColor()">
     <input type="radio" id="randomColor" name="option" value="randomColor">
     <label for="randomColor">Random Color</label>
     <input type="radio" id="darken" name="option" value="darken">

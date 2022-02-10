@@ -15,10 +15,15 @@ function determineWhichRadio(){
             element.addEventListener("click", determineColor);
     });
 }
+function teste(){
+    console.log("teste")
+}
 
 function determineColor(){
-    console.log(this)
-    if (this.value == "solid"){
+    
+    if (this.value == "solid" || this.type != "radio"){
+        let radioSolid = document.querySelector("#solid")
+        radioSolid.checked = true;
         color = document.querySelector("#color").value
         console.log("Changed - solid color")
         chooser = "solid"
@@ -28,7 +33,7 @@ function determineColor(){
         console.log("Changed -- Random Color")
     }
     else if(this.value == "darken"){
-        
+        chooser = "darken"
     }
 }
 
@@ -40,6 +45,11 @@ function changeColor(e){
         color = "#"+Math.floor(Math.random()*16777215).toString(16);
         e.target.setAttribute("style", "background-color:"+color+";")
     }
+    else if(chooser = "darken"){
+        this.style.backgroundColor = "black";
+        this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
+        console.log(this)
+    }
 }
 
 function createMyDivs(number){
@@ -48,14 +58,13 @@ function createMyDivs(number){
     wrapper.classList.add("wrapper")
     document.body.appendChild(wrapper)
 
-    for(let i = 0; i<number; i++){
-        for(let j = 0; j<number; j++){
+    for(let i = 0; i<number*number; i++){
         let boxDiv = document.createElement("div")
         boxDiv.classList.add("boxDiv")
         wrapper.appendChild(boxDiv)
         boxDiv.addEventListener("mouseenter", changeColor);
     }
-    }
+    
 
     let size = 960/number;
     document.documentElement.style
