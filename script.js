@@ -15,25 +15,23 @@ function determineWhichRadio(){
             element.addEventListener("click", determineColor);
     });
 }
-function teste(){
-    console.log("teste")
-}
-
 function determineColor(){
-    
     if (this.value == "solid" || this.type != "radio"){
         let radioSolid = document.querySelector("#solid")
         radioSolid.checked = true;
         color = document.querySelector("#color").value
-        console.log("Changed - solid color")
-        chooser = "solid"
+        chooser = this.value
     }
     else if(this.value == "randomColor"){
         chooser = "randomColor"
-        console.log("Changed -- Random Color")
+        
+    }
+    else if(this.value == "eraser"){
+        chooser = this.value
+        
     }
     else if(this.value == "darken"){
-        chooser = "darken"
+        chooser = this.value
     }
 }
 
@@ -45,10 +43,12 @@ function changeColor(e){
         color = "#"+Math.floor(Math.random()*16777215).toString(16);
         e.target.setAttribute("style", "background-color:"+color+";")
     }
-    else if(chooser = "darken"){
+    else if(chooser == "darken"){
         this.style.backgroundColor = "black";
         this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
-        console.log(this)
+    }    
+    else if(chooser == "eraser"){
+        this.style.backgroundColor = "white";
     }
 }
 
